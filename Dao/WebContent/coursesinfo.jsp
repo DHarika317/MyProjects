@@ -1,3 +1,4 @@
+<%@page import="org.javahd.dao.CoursesDaoIntf"%>
 <%@page import="org.javahd.bean.Courses"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.javahd.dao.DaoFactory"%>
@@ -12,9 +13,9 @@
 </head>
 <body>
 <%! 
-CoursesDao dao;
+CoursesDaoIntf dao;
 public void jspInit(){
-	dao = (CoursesDao)DaoFactory.getdao("CoursesDao");
+	dao = (CoursesDaoIntf)DaoFactory.getdao("CoursesDao");
 }
 %>
 
@@ -28,7 +29,7 @@ for(Courses c1:list){
 %>
 <tr><td><%= c1.getCourseId() %></td><td><%= c1.getCourseName() %></td><td><%= c1.getDuration() %></td><td><%= c1.getFee() %></td>
 <td><a href = 'coursesopr.jsp?action=delete&courseid=<%=c1.getCourseId()%>' onclick='return confirm("You want to delete a course?")'>Delete Course</a></td>
-<td><a href = 'add&editform.jsp?action=edit&courseid=<%=c1.getCourseId()%>&coursename=<%=c1.getCourseName()%>&coursedur=<%=c1.getDuration()%>&coursefee=<%=c1.getFee()%>' onclick='return confirm("You want to edit this course?")'>Edit Course</a></td>
+<td><a href = 'add&editform.jsp?action=edit&courseid=<%=c1.getCourseId()%>&coursename=<%=c1.getCourseName().replace("+", "%2B")%>&coursedur=<%=c1.getDuration()%>&coursefee=<%=c1.getFee()%>' onclick='return confirm("You want to edit this course?")'>Edit Course</a></td>
 </tr>
 <%
 }

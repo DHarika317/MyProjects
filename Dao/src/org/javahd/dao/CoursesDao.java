@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import org.javahd.bean.Courses;
 
-public class CoursesDao extends MainDao {
+public class CoursesDao extends MainDao implements CoursesDaoIntf {
 	PreparedStatement ps1,ps2,ps3,ps4;
 	CoursesDao(){	
 		try {

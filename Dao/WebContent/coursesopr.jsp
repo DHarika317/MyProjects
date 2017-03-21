@@ -1,3 +1,4 @@
+<%@page import="org.javahd.dao.CoursesDaoIntf"%>
 <%@page import="org.javahd.bean.Courses"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.javahd.dao.DaoFactory"%>
@@ -11,10 +12,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%!CoursesDao dao;
+	<%!CoursesDaoIntf dao;
 	String action;
 	public void jspInit() {
-		dao = (CoursesDao) DaoFactory.getdao("CoursesDao");
+		dao = (CoursesDaoIntf) DaoFactory.getdao("CoursesDao");
 	}%>
 	<%
 		action = request.getParameter("action");
@@ -30,7 +31,8 @@
 					Integer.parseInt(request.getParameter("cdur")),
 					Integer.parseInt(request.getParameter("cfee"))));
 		}
-		response.setHeader("Refresh", "1;coursesinfo.jsp");
+		response.sendRedirect("coursesinfo.jsp");
+		//response.setHeader("Refresh", "1;coursesinfo.jsp");
 		%>
 	
 </body>
