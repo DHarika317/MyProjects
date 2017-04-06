@@ -18,7 +18,7 @@
 //WebTarget target = client.target("http://localhost:8080/RestCourses/webapi/courses");
 WebTarget target = client.target("http://localhost:8080/RestCoursesService/webapi").path("courses");
 resp = target.request().get(String.class);
-//System.out.println(resp);
+System.out.println(resp);
 
 JSONArray jsonArr = new JSONArray(resp);
 %>
