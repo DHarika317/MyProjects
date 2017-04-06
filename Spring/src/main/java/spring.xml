@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	default-destroy-method="destroy"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd 
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd" >
+																												
+
+<bean class = "org.javahd.spring.aop.LoggingAspect"></bean>
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+<!-- creating object for student class	 -->
+<!-- creating address bean within the student bean -->	
+<bean class="org.javahd.spring.bean.Student" id="s1" init-method="init" destroy-method="destroy">
+<property name="rollno" value="1"/>
+<property name="name" value="Ross"/>
+<property name="dept" value="CS"/>
+<property name="fee" value="30000"/>
+<property name="address">
+<bean class="org.javahd.spring.bean.Address">
+<property name="street" value="6743 Phillipian Ave"/>
+<property name="aptNo" value="86"/>
+<property name="city" value="Cary"/>
+<property name="state" value="North Carolina"/>
+<property name="zip" value="23951"/>
+</bean>
+</property>
+</bean>
+
+<!-- If some bean properties are same as parent object use parent attribute (Called Bean Inheritance)-->
+<!-- Refering to address bean using ref attribute  -->	
+<bean class="org.javahd.spring.bean.Student" id="s2" parent="s1">
+<property name="rollno" value="2"/>
+<property name="name" value="John"/>
+<property name="address">
+<set>
+<ref bean="a1"/>
+<ref bean="a2"/>
+</set>
+</property>
+</bean>
+
+<!-- Another way of creating object using constructor-arg tag through student class constructor -->	
+<bean class="org.javahd.spring.bean.Student" id="s3">
+<constructor-arg name="rollno" value="3"/>
+<constructor-arg name="name" value="Hannah"/>
+<constructor-arg name="dept" value="ECE"/>
+<constructor-arg name="fee" value="30000"/>
+<!-- <property name="addresses" ref="a3"></property> -->
+</bean>
+
+<!-- creating object for address class	 -->
+<bean class="org.javahd.spring.bean.Address" id="a1">
+<property name="street" value="6743 Brigde Grove"/>
+<property name="aptNo" value="106"/>
+<property name="city" value="Atlanta"/>
+<property name="state" value="Virginia"/>
+<property name="zip" value="34561"/>
+</bean>
+
+<bean class="org.javahd.spring.bean.Address" id="a2">
+<property name="street" value="6743 Walnut Ave"/>
+<property name="aptNo" value="45"/>
+<property name="city" value="Kansas"/>
+<property name="state" value="Missouri"/>
+<property name="zip" value="67451"/>
+</bean>
+
+<bean class="org.javahd.spring.bean.Address" id="a3">
+<property name="street" value="245 Andrea Ave"/>
+<property name="aptNo" value="63"/>
+<property name="city" value="Cary"/>
+<property name="state" value="North Carolina"/>
+<property name="zip" value="27561"/>
+</bean>
+
+</beans>
