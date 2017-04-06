@@ -56,4 +56,20 @@ public class CoursesImpl {
 		
 	}
 	
+	@GET
+	@Path("/{minFee}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Courses> showCoursesbyMinFee(@PathParam("minFee") int minFee) {
+		 ArrayList<Courses> list1 = dao.showCourses();
+        ArrayList<Courses> list2 = new ArrayList<>();
+        for(Courses c : list1){
+        	if(c.getFee()<=minFee){
+        		list2.add(c);
+        	}
+        }
+        return list2;
+        
+    }
+	
+	
 }
